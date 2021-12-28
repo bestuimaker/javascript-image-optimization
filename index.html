@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="compressor.min.js"></script>
+</head>
+
+<body>
+    <div>
+        <div>
+            <label for="profile-file">Choose the image</label>
+        </div>
+        <div>
+            <input type="file" id="profile-file" accept="image/*">
+        </div>
+    </div>
+    <hr />
+    <div>
+        <div>
+            <label for="profile-file">Select the quality</label>
+        </div>
+
+        <select id="quality" name="quality">
+            <optgroup label="Best">
+                <option value="1">1</option>
+                <option value="0.9">0.9</option>
+                <option value="0.8">0.8</option>
+            </optgroup>
+            <optgroup label="Good (Recommended)">
+                <option value="0.7">0.7</option>
+                <option value="0.6">0.6</option>
+                <option value="0.5">0.5</option>
+            </optgroup>
+            <optgroup label="Poor">
+                <option value="0.4">0.4</option>
+                <option value="0.3">0.3</option>
+                <option value="0.2">0.2</option>
+            </optgroup>
+        </select>
+    </div>
+    <hr />
+    <div>
+        <button id="upload-button">Upload the image</button>
+    </div>
+    <script>
+        
+        document.getElementById('upload-button').addEventListener('click', (e) => {
+            const file = document.getElementById('profile-file').files[0];
+            var qualityIndex = parseFloat(document.getElementById('quality').value);
+            if (!file) return;
+
+            console.log(typeof(qualityIndex) );
+            console.log(qualityIndex === 0.8);
+
+            new Compressor(file, {
+                quality: qualityIndex,
+
+                // The compression process is asynchronous,
+                // which means you have to access the `result` in the `success` hook function.
+                success(result) {
+                    const formData = new FormData();
+
+                    // The third parameter is required for server
+                    formData.append('profile-file', result, result.name);
+
+                    // Send the compressed image file to server with XMLHttpRequest.
+                    axios.post('http://localhost:3000/profile-upload-single', formData).then(() => {
+                        console.log('Upload success');
+                    });
+                },
+                error(err) {
+                    console.log(err.message);
+                },
+            });
+
+        })        
+    </script>
+</body>
+
+</html>
