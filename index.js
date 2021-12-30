@@ -2,6 +2,9 @@ var http = require('http');
 
 var finalhandler = require('finalhandler');
 var serveStatic = require('serve-static');
+const hostname = '127.0.0.1';
+const port = 9090;
+
 
 var serve = serveStatic("./");
 
@@ -10,4 +13,6 @@ var server = http.createServer(function(req, res) {
   serve(req, res, done);
 });
 
-server.listen(9090);
+server.listen(port, hostname, ()=>{
+  console.log(`Server running at http://${hostname}:${port}/`);
+});

@@ -1,86 +1,107 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>Signin Template · Bootstrap v5.1</title>
 
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script type="text/javascript" src="compressor.min.js"></script>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
+
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://getbootstrap.com/docs/5.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="https://getbootstrap.com/docs/5.1/assets/img/favicons/apple-touch-icon.png"
+        sizes="180x180">
+    <link rel="icon" href="https://getbootstrap.com/docs/5.1/assets/img/favicons/favicon-32x32.png" sizes="32x32"
+        type="image/png">
+    <link rel="icon" href="https://getbootstrap.com/docs/5.1/assets/img/favicons/favicon-16x16.png" sizes="16x16"
+        type="image/png">
+    <link rel="manifest" href="https://getbootstrap.com/docs/5.1/assets/img/favicons/manifest.json">
+    <link rel="mask-icon" href="https://getbootstrap.com/docs/5.1/assets/img/favicons/safari-pinned-tab.svg"
+        color="#7952b3">
+    <link rel="icon" href="https://getbootstrap.com/docs/5.1/assets/img/favicons/favicon.ico">
+    <meta name="theme-color" content="#7952b3">
+
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+    <!-- Custom styles for this template -->
+    <link href="style.css" rel="stylesheet">
 </head>
 
 <body>
-    <div>
-        <div>
-            <label for="profile-file">Choose the image</label>
-        </div>
-        <div>
-            <input type="file" id="profile-file" accept="image/*">
-        </div>
-    </div>
-    <hr />
-    <div>
-        <div>
-            <label for="profile-file">Select the quality</label>
-        </div>
+    <main class="form-signin">
+        <form>
+            <div class="text-center">
+                <img class="mb-4" src="https://getbootstrap.com/docs/5.1/assets/brand/bootstrap-logo.svg" alt=""
+                    width="72" height="57">
+                <h1 class="h3 mb-3 fw-normal">Upload Files</h1>
+            </div>
+            <div class="form-group mb-3">
+                <label for="profile-file">Select Files</label>
+                <input multiple class="form-control" type="file" id="profile-file" accept="image/*">
+            </div>
+            <div class="form-group mb-3">
+                <label for="quality">Select Quality</label>
+                <select class="form-control" id="quality" name="quality">
+                    <option value="">Please select</option>
+                    <optgroup label="Best">
+                        <option value="1">1</option>
+                        <option value="0.9">0.9</option>
+                        <option value="0.8">0.8</option>
+                    </optgroup>
+                    <optgroup label="Good (Recommended)">
+                        <option value="0.7">0.7</option>
+                        <option value="0.6">0.6</option>
+                        <option value="0.5">0.5</option>
+                    </optgroup>
+                    <optgroup label="Poor">
+                        <option value="0.4">0.4</option>
+                        <option value="0.3">0.3</option>
+                        <option value="0.2">0.2</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="form-group mb-3" id="upload-progress">
+                <div class="progress">
+                    <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;"
+                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                </div>
+            </div>
 
-        <select id="quality" name="quality">
-            <optgroup label="Best">
-                <option value="1">1</option>
-                <option value="0.9">0.9</option>
-                <option value="0.8">0.8</option>
-            </optgroup>
-            <optgroup label="Good (Recommended)">
-                <option value="0.7">0.7</option>
-                <option value="0.6">0.6</option>
-                <option value="0.5">0.5</option>
-            </optgroup>
-            <optgroup label="Poor">
-                <option value="0.4">0.4</option>
-                <option value="0.3">0.3</option>
-                <option value="0.2">0.2</option>
-            </optgroup>
-        </select>
-    </div>
-    <hr />
-    <div>
-        <button id="upload-button">Upload the image</button>
-    </div>
-    <script>
-        
-        document.getElementById('upload-button').addEventListener('click', (e) => {
-            const file = document.getElementById('profile-file').files[0];
-            var qualityIndex = parseFloat(document.getElementById('quality').value);
-            if (!file) return;
+            <div class="form-group mb-3">
+                <button id="upload-button" class="w-100 btn btn-lg btn-primary">Upload</button>
+            </div>
+        </form>
+    </main>
 
-            console.log(typeof(qualityIndex) );
-            console.log(qualityIndex === 0.8);
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="compressor.min.js"></script>
+    <script type="text/javascript" src="web-script.js"></script>
 
-            new Compressor(file, {
-                quality: qualityIndex,
 
-                // The compression process is asynchronous,
-                // which means you have to access the `result` in the `success` hook function.
-                success(result) {
-                    const formData = new FormData();
-
-                    // The third parameter is required for server
-                    formData.append('profile-file', result, result.name);
-
-                    // Send the compressed image file to server with XMLHttpRequest.
-                    axios.post('http://localhost:3000/profile-upload-single', formData).then(() => {
-                        console.log('Upload success');
-                    });
-                },
-                error(err) {
-                    console.log(err.message);
-                },
-            });
-
-        })        
-    </script>
 </body>
 
 </html>
