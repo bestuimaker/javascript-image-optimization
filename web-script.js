@@ -2,8 +2,7 @@
   var uploadFiles = function (files, file, index, qualityIndex) {
     if (!file) return;
     if (!qualityIndex) qualityIndex = 0.6;
-
-    console.log(index);
+ 
     new Compressor(file, {
       quality: qualityIndex,
 
@@ -20,9 +19,6 @@
           .post("http://localhost:3000/profile-upload-single", formData)
           .then(() => {
             console.log("Upload success");
-            console.log(index);
-            // totalPercent = totalPercent+i;
-            // updateProgressBar(index);
           });
       },
       error(err) {
@@ -31,26 +27,14 @@
     });
   };
 
-  var toggleProgressBar = function (isEnable) {
-    document.getElementById("upload-progress").style.display =
-      isEnable === true ? "block" : "none";
-  };
-  var updateProgressBar = function (totalPercent) {
-    console.log(totalPercent)
-    document.getElementById("progress-bar").style.width = totalPercent+'%';
-  };
-
   document.getElementById("profile-file").addEventListener("change", (e) => {});
 
   document.getElementById("upload-button").addEventListener("click", (e) => {
     e.preventDefault();
     var qualityIndex = parseFloat(document.getElementById("quality").value);
     const fileList = document.getElementById("profile-file").files;
-    // toggleProgressBar(true);
     for (var i = 0; i < fileList.length; i++) {
       uploadFiles(fileList, fileList[i], i, qualityIndex);
     }
-    console.log("done");
-    // toggleProgressBar(false);
   });
 })();
