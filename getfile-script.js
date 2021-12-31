@@ -1,6 +1,6 @@
 (function () {
-  //   var hostName = "https://multifilesupload.herokuapp.com";
-  var hostName = "http://localhost:3002";
+  var hostName = "https://multifilesupload.herokuapp.com";
+  //var hostName = "http://localhost:3002";
 
   var getAllFiles = function () {
     axios.get(`${hostName}/getfiles`).then((response) => {
