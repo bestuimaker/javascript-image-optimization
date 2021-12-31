@@ -11,6 +11,4 @@ var server = http.createServer(function(req, res) {
   serve(req, res, done);
 });
 
-server.listen(port, ()=>{
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+app.listen(port,() => console.log(`Server running on port ${port}!\nClick http://localhost:${port}/`))
