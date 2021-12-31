@@ -4,7 +4,8 @@
   "description": "javascript image optimization and upload to a light weight node server.",
   "main": "compressor.min.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",

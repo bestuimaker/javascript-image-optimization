@@ -3,8 +3,7 @@ var http = require('http');
 var finalhandler = require('finalhandler');
 var serveStatic = require('serve-static');
 const hostname = '127.0.0.1';
-const port = 9090;
-
+const port = process.env.PORT;
 
 var serve = serveStatic("./");
 

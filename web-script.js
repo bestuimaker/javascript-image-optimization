@@ -16,7 +16,7 @@
   
         // Send the compressed image file to server with XMLHttpRequest.
         axios
-          .post("http://localhost:3000/profile-upload-single", formData)
+          .post("https://multifilesupload.herokuapp.com/profile-upload-single", formData)
           .then(() => {
             console.log("Upload success");
           });
