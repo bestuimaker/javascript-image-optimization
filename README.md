@@ -1,5 +1,5 @@
-# javascript-image-optimization
-javascript image optimization at front-end side and uploading to a light weight node server to test.
+# Javascript Image Optimization
+Javascript Image Optimization at front-end side and uploading to a light weight node server to test.
 
 ## Setup the upload server
 Follow readme at:

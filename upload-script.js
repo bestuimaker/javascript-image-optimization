@@ -1,8 +1,10 @@
 (function () {
+  var hostName = "https://multifilesupload.herokuapp.com";
+  // var hostName = "http://localhost:3002";
   var uploadFiles = function (files, file, index, qualityIndex) {
     if (!file) return;
     if (!qualityIndex) qualityIndex = 0.6;
- 
+
     new Compressor(file, {
       quality: qualityIndex,
 
@@ -13,13 +15,11 @@
 
         // The third parameter is required for server
         formData.append("profile-file", result, result.name);
-  
+
         // Send the compressed image file to server with XMLHttpRequest.
-        axios
-          .post("https://multifilesupload.herokuapp.com/profile-upload-single", formData)
-          .then(() => {
-            console.log("Upload success");
-          });
+        axios.post(`${hostName}/profile-upload-single`, formData).then(() => {
+          console.log("Upload success");
+        });
       },
       error(err) {
         console.log(err.message);
@@ -36,5 +36,10 @@
     for (var i = 0; i < fileList.length; i++) {
       uploadFiles(fileList, fileList[i], i, qualityIndex);
     }
+    document.getElementById("upload-form").reset();
   });
+
+  var getAllFiles = function () {
+    console.log("hello");
+  };
 })();
