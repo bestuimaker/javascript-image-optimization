@@ -26,7 +26,7 @@
           createTable +
           `
             <tr>
-              <td>${files[i].name}</td>
+              <td><a target="_blank" href="/${files[i].path}">${files[i].name}</a></td>
               <td>${Math.round(files[i].size / 1024)}</td>
             </tr>
         `;
