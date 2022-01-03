@@ -1,6 +1,6 @@
 (function () {
   var hostName = "https://multifilesupload.herokuapp.com";
-  //var hostName = "http://localhost:3002";
+  // var hostName = "http://localhost:3002";
 
   var getAllFiles = function () {
     axios.get(`${hostName}/getfiles`).then((response) => {
@@ -10,12 +10,8 @@
       var createTable = `<table class="table table-bordered table-stripped">
       <thead>
         <tr>
-          <th>Current Folder: ${data.name}</th>
-          <th>Total Size: ${Math.round(data.size / 1024)}</th>
-        </tr>
-        <tr>
           <th>File Name</th>
-          <th>File Size</th>
+          <th>File Size(KB)</th>
         </tr>
       </thead>
       <tbody>
@@ -26,7 +22,9 @@
           createTable +
           `
             <tr>
-              <td><a target="_blank" href="https://multifilesupload.herokuapp.com/${files[i].path}">${files[i].name}</a></td>
+              <td><a target="_blank" href="https://multifilesupload.herokuapp.com/${
+                files[i].path
+              }">${files[i].name}</a></td>
               <td>${Math.round(files[i].size / 1024)}</td>
             </tr>
         `;
@@ -38,20 +36,31 @@
       </tbody>
       </table>`;
 
+      document.getElementById("current-folder").innerHTML = data.name;
+      document.getElementById("total-size").innerHTML = Math.round(
+        data.size / 1024
+      );
       document.getElementById("file-table").innerHTML = createTable;
     });
   };
+  var deleteAllFiles = function () {
+    axios.get(`${hostName}/deletefiles`).then((response) => {
+      setTimeout(() => {
+        getAllFiles();
+      }, 1000);
+    });
+  };
 
-  document.addEventListener("DOMContentLoaded", function (event) {
+  document.addEventListener("DOMContentLoaded", (event) => {
+    getAllFiles();
+  });
+
+  document.getElementById("refresh-button").addEventListener("click", (e) => {
     getAllFiles();
   });
 
   document.getElementById("delete-button").addEventListener("click", (e) => {
     e.preventDefault();
-    axios.get(`${hostName}/deletefiles`).then((response) => {
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
-    });
+    deleteAllFiles();
   });
 })();

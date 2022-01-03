@@ -29,58 +29,87 @@
     <meta name="theme-color" content="#7952b3">
 
     <!-- Custom styles for this template -->
-    <link href="style.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
-    <main class="container-fluid mt-4">
-        <div class="row align-items-center justify-content-center">
-            <div class="col-sm-6">
-                <form name="upload-form" id="upload-form">
-                    <div class="text-center">
-                        <img class="mb-4" src="https://getbootstrap.com/docs/5.1/assets/brand/bootstrap-logo.svg" alt=""
-                            width="72" height="57">
-                        <h1 class="h3 mb-3 fw-normal">Upload Files</h1>
+    <main class="container-fluid h-100">
+        <div class="row h-100">
+            <div class="col-sm-4 sidebar">
+                <div class="card">
+                    <div class="card-body">
+                        <form name="upload-form" id="upload-form">
+                            <div class="text-center">
+                                <img class="mb-4"
+                                    src="https://getbootstrap.com/docs/5.1/assets/brand/bootstrap-logo.svg" alt=""
+                                    width="72" height="57">
+                                <h1 class="h3 mb-3 fw-normal">Upload Files</h1>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="profile-file">Select Files</label>
+                                <input multiple class="form-control" type="file" id="profile-file" accept="image/*">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="quality">Select Quality</label>
+                                <select class="form-control" id="quality" name="quality">
+                                    <option value="">Please select</option>
+                                    <optgroup label="Best">
+                                        <option value="1">1</option>
+                                        <option value="0.9">0.9</option>
+                                        <option value="0.8">0.8</option>
+                                    </optgroup>
+                                    <optgroup label="Good (Recommended)">
+                                        <option value="0.7">0.7</option>
+                                        <option value="0.6">0.6</option>
+                                        <option value="0.5">0.5</option>
+                                    </optgroup>
+                                    <optgroup label="Poor">
+                                        <option value="0.4">0.4</option>
+                                        <option value="0.3">0.3</option>
+                                        <option value="0.2">0.2</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <button id="upload-button" class="w-100 btn btn-lg btn-primary">Upload</button>
+                            </div>
+                            <div class="form-group mb-3">
+                                <a id="upload-button" href="files.html" class="w-100 btn btn-lg btn-outline-primary">See
+                                    all files</a>
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-group mb-3">
-                        <label for="profile-file">Select Files</label>
-                        <input multiple class="form-control" type="file" id="profile-file" accept="image/*">
+                </div>
+            </div>
+            <div class="col-sm-8 document-tree">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6 text-left d-flex justify-content-between">
+                                <span>Current Directory : <strong><span id="current-folder">...</span></strong></span>
+                                <span>Total Size : <strong><span id="total-size">...</span>KB</strong></span>
+                            </div>
+                            <div class="col-6 text-end">
+                                <button id="refresh-button" class="btn btn-outline-primary">Refresh</button>
+                                <button id="delete-button" class="btn btn-outline-primary">Delete Files</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group mb-3">
-                        <label for="quality">Select Quality</label>
-                        <select class="form-control" id="quality" name="quality">
-                            <option value="">Please select</option>
-                            <optgroup label="Best">
-                                <option value="1">1</option>
-                                <option value="0.9">0.9</option>
-                                <option value="0.8">0.8</option>
-                            </optgroup>
-                            <optgroup label="Good (Recommended)">
-                                <option value="0.7">0.7</option>
-                                <option value="0.6">0.6</option>
-                                <option value="0.5">0.5</option>
-                            </optgroup>
-                            <optgroup label="Poor">
-                                <option value="0.4">0.4</option>
-                                <option value="0.3">0.3</option>
-                                <option value="0.2">0.2</option>
-                            </optgroup>
-                        </select>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div id="file-table"></div>
                     </div>
-        
-                    <div class="form-group mb-3">
-                        <button id="upload-button" class="w-100 btn btn-lg btn-primary">Upload</button>
-                    </div>
-                    <div class="form-group mb-3">
-                        <a id="upload-button" href="files.html" class="w-100 btn btn-lg btn-outline-primary">See all files</a>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script type="text/javascript" src="compressor.min.js"></script>
-    <script type="text/javascript" src="upload-script.js"></script>
+    <script type="text/javascript" src="js/upload-script.js"></script>
+    <script type="text/javascript" src="js/getfile-script.js"></script>
 </body>
+
 </html>
