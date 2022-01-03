@@ -26,7 +26,7 @@
           createTable +
           `
             <tr>
-              <td><a target="_blank" href="/${files[i].path}">${files[i].name}</a></td>
+              <td><a target="_blank" href="https://multifilesupload.herokuapp.com/${files[i].path}">${files[i].name}</a></td>
               <td>${Math.round(files[i].size / 1024)}</td>
             </tr>
         `;
